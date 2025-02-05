@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,11 @@ import { ToastrModule } from 'ngx-toastr';
     AdminModule,
     UiModule,
     ToastrModule.forRoot(),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide : "baseUrl", useValue:"https://localhost:7159/api",multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
