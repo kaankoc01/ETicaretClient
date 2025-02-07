@@ -20,11 +20,19 @@ export class CreateComponent implements OnInit {
     create_Product.stock = parseInt(stock.value);
     create_Product.price = parseFloat(price.value)
 
+
+
     this.productService.create(create_Product, () => {
       this.alertify.message("ürün başarıyla eklenmiştir.",{
         dismissOthers:true,
         messageType : MessageType.Success,
         position: Position.TopRight
+      });
+    },errorMessage => {
+      this.alertify.message(errorMessage,{
+        dismissOthers:true,
+        messageType : MessageType.Error,
+        position : Position.TopLeft
       });
     });
   }
