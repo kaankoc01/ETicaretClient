@@ -10,27 +10,56 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit ,AfterViewInit{
   constructor(private productService : ProductService,private alertifyService : AlertifyService) { }
 
-  displayedColumns: string[] = ['name', 'stock', 'price','createdDate','updatedDate'];
-  dataSource : MatTableDataSource<List_Product> = null
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate'];
+  dataSource: MatTableDataSource<List_Product> = new MatTableDataSource<List_Product>([]);
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  async getProducts() {
+    try {
+      const pageIndex = this.paginator?.pageIndex ?? 0;
+      const pageSize = this.paginator?.pageSize ?? 5;
 
-async getProducts(){
-  const allProducts : List_Product[] = await this.productService.read(this.paginator ? this.paginator.pageIndex :0,this.paginator ? this.paginator.pageSize :5,()=>this.alertifyService.message("Ürün Listelendi",{
-    dismissOthers : true,
-    messageType : MessageType.Error,
-    position : Position.TopRight
-  }));
-  this.dataSource = new MatTableDataSource<List_Product>(allProducts);
-  this.dataSource.paginator = this.paginator;
-}
+      const allProducts: { totalCount: number; products: List_Product[] } = await this.productService.read(
+        pageIndex,
+        pageSize,
+        () => this.alertifyService.message("Ürün Listelendi", {
+          dismissOthers: true,
+          messageType: MessageType.Success,
+          position: Position.TopRight
+        }),
+        (errorMessage) => this.alertifyService.message(errorMessage, {
+          dismissOthers: true,
+          messageType: MessageType.Error,
+          position: Position.TopRight
+        })
+      );
 
- async ngOnInit() {
-   await this.getProducts();
+      this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
+      this.dataSource.paginator = this.paginator;
+      this.paginator.length = allProducts.totalCount;
+    } catch (error) {
+      this.alertifyService.message("Ürünler yüklenirken bir hata oluştu.", {
+        dismissOthers: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight
+      });
+    }
+  }
+
+  async pageChanged() {
+    await this.getProducts();
+  }
+
+  ngOnInit() {
+    // Verileri burada değil, ngAfterViewInit'te yükle
+  }
+
+  ngAfterViewInit() {
+    this.getProducts();
   }
 
 }

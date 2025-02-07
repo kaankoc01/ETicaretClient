@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { create_product } from 'src/app/contracts/create_product';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
@@ -14,13 +14,14 @@ export class CreateComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  @Output() createdProduct : EventEmitter<create_product> = new EventEmitter();
+
   create(name:HTMLInputElement,stock:HTMLInputElement, price:HTMLInputElement ){
     const create_Product : create_product = new create_product
     create_Product.name = name.value;
     create_Product.stock = parseInt(stock.value);
     create_Product.price = parseFloat(price.value)
-
-
 
     this.productService.create(create_Product, () => {
       this.alertify.message("ürün başarıyla eklenmiştir.",{
@@ -28,6 +29,7 @@ export class CreateComponent implements OnInit {
         messageType : MessageType.Success,
         position: Position.TopRight
       });
+      this.createdProduct.emit(create_Product);
     },errorMessage => {
       this.alertify.message(errorMessage,{
         dismissOthers:true,

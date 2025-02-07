@@ -7,6 +7,8 @@ import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
     AdminModule,
     UiModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [
     {provide : "baseUrl", useValue:"https://localhost:7159/api",multi:true}
