@@ -4,6 +4,7 @@ import { AlertifyService, MessageType, Position } from 'src/app/services/admin/a
 import { ProductService } from 'src/app/services/common/models/product.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+declare var $ : any;
 
 @Component({
   selector: 'app-list',
@@ -14,8 +15,8 @@ export class ListComponent implements OnInit ,AfterViewInit{
   constructor(private productService : ProductService,private alertifyService : AlertifyService) { }
 
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate'];
-  dataSource: MatTableDataSource<List_Product> = new MatTableDataSource<List_Product>([]);
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate','edit','delete'];
+  dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   async getProducts() {
@@ -39,7 +40,7 @@ export class ListComponent implements OnInit ,AfterViewInit{
       );
 
       this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
-      this.dataSource.paginator = this.paginator;
+     // this.dataSource.paginator = this.paginator;
       this.paginator.length = allProducts.totalCount;
     } catch (error) {
       this.alertifyService.message("Ürünler yüklenirken bir hata oluştu.", {
@@ -49,6 +50,11 @@ export class ListComponent implements OnInit ,AfterViewInit{
       });
     }
   }
+ // delete(id,event){
+ //   const img : HTMLImageElement = event.srcElement;
+ //   $(img.parentElement.parentElement).fadeOut(2000);
+ // }
+
 
   async pageChanged() {
     await this.getProducts();
