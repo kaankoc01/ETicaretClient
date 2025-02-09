@@ -40,7 +40,6 @@ export class ListComponent implements OnInit ,AfterViewInit{
       );
 
       this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
-     // this.dataSource.paginator = this.paginator;
       this.paginator.length = allProducts.totalCount;
     } catch (error) {
       this.alertifyService.message("Ürünler yüklenirken bir hata oluştu.", {
