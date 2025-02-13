@@ -17,13 +17,7 @@ export class CreateComponent implements OnInit {
   }
 
   @Output() createdProduct : EventEmitter<create_product> = new EventEmitter();
-  @Output() fileUploadOptions : Partial<FileUploadOptions> = {
-    action : "upload",
-    controller : "products",
-    explanation : "Resimleri sürükleyin veya seçin...",
-    isAdminPage : true,
-    accept :".png , .jpg , .jpeg , .json"
-  };
+
 
   create(name:HTMLInputElement,stock:HTMLInputElement, price:HTMLInputElement ){
     const create_Product : create_product = new create_product

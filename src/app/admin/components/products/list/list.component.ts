@@ -4,6 +4,8 @@ import { AlertifyService, MessageType, Position } from 'src/app/services/admin/a
 import { ProductService } from 'src/app/services/common/models/product.service';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { DialogService } from 'src/app/services/common/dialog.service';
+import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 declare var $ : any;
 
 @Component({
@@ -12,10 +14,10 @@ declare var $ : any;
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit ,AfterViewInit{
-  constructor(private productService : ProductService,private alertifyService : AlertifyService) { }
+  constructor(private productService : ProductService,private alertifyService : AlertifyService, private dialogService : DialogService) { }
 
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate','edit','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate','photos','edit','delete'];
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -49,11 +51,16 @@ export class ListComponent implements OnInit ,AfterViewInit{
       });
     }
   }
- // delete(id,event){
- //   const img : HTMLImageElement = event.srcElement;
- //   $(img.parentElement.parentElement).fadeOut(2000);
- // }
 
+  addProductImages(id : string){
+    this.dialogService.openDialog({
+      componentType : SelectProductImageDialogComponent,
+      data : id,
+      options :{
+        width : "1400px"
+      }
+    })
+  }
 
   async pageChanged() {
     await this.getProducts();
