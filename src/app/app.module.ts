@@ -25,7 +25,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [
     {provide : "baseUrl", useValue:"https://localhost:7159/api",multi:true}

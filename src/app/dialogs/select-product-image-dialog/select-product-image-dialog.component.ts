@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FileUploadOptions } from '../../services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 import { List_Product_Image } from 'src/app/contracts/list_product_image';
-import { MatCard } from '@angular/material/card';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { DeleteDialogComponent, DeleteState } from '../delete-dialog/delete-dialog.component';
 
