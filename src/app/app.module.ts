@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,12 @@ import { RouterModule } from '@angular/router';
     MatPaginatorModule,
     MatTableModule,
     RouterModule,
+    JwtModule.forRoot({
+      config : {
+        tokenGetter : () => localStorage.getItem("accessToken"),
+        allowedDomains : ["localhost:7159"]
+      }
+    })
   ],
   providers: [
     {provide : "baseUrl", useValue:"https://localhost:7159/api",multi:true}
