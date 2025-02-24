@@ -6,13 +6,14 @@ import { AppComponent } from './app.component';
 import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
 import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, S
         ],
         onError: err => console.log(err)
       } as SocialAuthServiceConfig
-    }
+    },
+    {provide : HTTP_INTERCEPTORS, useClass : HttpErrorHandlerInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
