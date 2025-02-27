@@ -26,7 +26,7 @@ export class ListComponent implements OnInit ,AfterViewInit{
       const pageIndex = this.paginator?.pageIndex ?? 0;
       const pageSize = this.paginator?.pageSize ?? 5;
 
-      const allProducts: { totalCount: number; products: List_Product[] } = await this.productService.read(
+      const allProducts: { totalProductCount: number; products: List_Product[] } = await this.productService.read(
         pageIndex,
         pageSize,
         () => this.alertifyService.message("Ürün Listelendi", {
@@ -42,7 +42,7 @@ export class ListComponent implements OnInit ,AfterViewInit{
       );
 
       this.dataSource = new MatTableDataSource<List_Product>(allProducts.products);
-      this.paginator.length = allProducts.totalCount;
+      this.paginator.length = allProducts.totalProductCount;
     } catch (error) {
       this.alertifyService.message("Ürünler yüklenirken bir hata oluştu.", {
         dismissOthers: true,

@@ -37,10 +37,10 @@ export class ProductService {
     size: number = 5,
     successCallBack?: () => void,
     errorCallback?: (errorMessage: string) => void
-  ): Promise<{ totalCount: number; products: List_Product[] }> {
+  ): Promise<{ totalProductCount: number; products: List_Product[] }> {
     try {
       const data = await firstValueFrom(
-        this.httpclientService.get<{ totalCount: number; products: List_Product[] }>({
+        this.httpclientService.get<{ totalProductCount: number; products: List_Product[] }>({
           controller: "products",
           queryString: `page=${page}&size=${size}`
         })
