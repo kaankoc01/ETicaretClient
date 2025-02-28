@@ -12,6 +12,10 @@ export class ListComponent implements OnInit {
   constructor(private productService : ProductService, private activatedRoute : ActivatedRoute) {}
 
   currentPageNo: number;
+  totalProductCount : number;
+  totalPageCount: number;
+  pageSize : number = 12;
+  pageList : number[] = [];
 
   products : List_Product[];
    ngOnInit() {
@@ -19,7 +23,7 @@ export class ListComponent implements OnInit {
       this.currentPageNo = parseInt(params["pageNo"] ?? 1);
 
       const data :{totalProductCount:number , products : List_Product[]} = await
-       this.productService.read(this.currentPageNo - 1 ,12,
+       this.productService.read(this.currentPageNo - 1 ,this.pageSize,
         () => {
 
        },
@@ -27,6 +31,23 @@ export class ListComponent implements OnInit {
 
        });
        this.products = data.products;
+       this.totalProductCount = data.totalProductCount;
+       this.totalPageCount = Math.ceil(this.totalProductCount / this.pageSize);
+
+       this.pageList = [];
+
+       if(this.currentPageNo - 3 <= 0)
+        for(let i = 1; i <= 7 ; i++)
+          this.pageList.push(i);
+
+       else if(this.currentPageNo +3 >= this.totalPageCount)
+        for(let i = this.totalPageCount - 6; i <= this.totalPageCount ; i++)
+          this.pageList.push(i);
+
+       else
+        for(let i = this.currentPageNo - 3 ; i <= this.currentPageNo + 3 ; i++)
+          this.pageList.push(i);
+
       })
     };
   }
