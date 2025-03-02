@@ -54,6 +54,14 @@ async deleteImage(imageId : string,event:any){
 
 
   }
+
+
+  showCase(imageId : string){
+    this.productService.changeShowcaseImage(imageId, this.data as string,() => {
+
+    });
+
+  }
 }
 
 

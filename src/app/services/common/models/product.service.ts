@@ -3,7 +3,7 @@ import { HttpClientService } from '../http-client.service';
 import { create_product } from 'src/app/contracts/create_product';
 import { HttpErrorResponse } from '@angular/common/http';
 import { List_Product } from 'src/app/contracts/list.product';
-import { firstValueFrom, Observable } from 'rxjs';
+import { first, firstValueFrom, Observable } from 'rxjs';
 import { List_Product_Image } from 'src/app/contracts/list_product_image';
 
 @Injectable({
@@ -85,6 +85,18 @@ export class ProductService {
       queryString : `imageId=${imageId}`
     },id)
     await firstValueFrom(deleteObservable);
+  }
+
+  async changeShowcaseImage(imageId : string , productId : string,successCallBack? :() => void) : Promise<void>
+  {
+   const changeshowCaseImageObservable =  this.httpclientService.get({
+      controller : "products",
+      action : "ChangeShowcaseImage",
+      queryString : `imageId=${imageId}&productId=${productId}`
+    });
+
+    await firstValueFrom(changeshowCaseImageObservable);
+    successCallBack();
   }
  }
 

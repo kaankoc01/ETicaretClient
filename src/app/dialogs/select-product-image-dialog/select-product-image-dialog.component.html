@@ -2,9 +2,9 @@
 <mat-dialog-content class="mat-typography">
   <app-file-upload [options]="options"></app-file-upload>
 
-
   <mat-card class="product-image-card" appearance="outlined" *ngFor="let image of images">
     <mat-card-header>
+      <input type="radio" name="img" (click)="showCase(image.id)" />
     </mat-card-header>
     <img style="width:100px; height: 100px;;" mat-card-image [src]="image.path">
     <mat-card-content>
