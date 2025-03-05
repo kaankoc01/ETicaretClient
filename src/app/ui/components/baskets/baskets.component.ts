@@ -32,4 +32,5 @@ export class BasketsComponent implements OnInit {
     $("." + basketItemId).fadeOut(500);
 
   }
+
 }
