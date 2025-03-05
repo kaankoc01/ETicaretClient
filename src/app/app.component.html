@@ -15,9 +15,7 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" routerLink="products">Ürünler</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="baskets">Sepet</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" routerLink="register" *ngIf="!authService.isAuthenticated">Kayıt Ol</a>
             </li>
@@ -31,23 +29,19 @@
               <a routerLink="admin" class="btn btn-outline-success" type="submit" *ngIf="authService.isAuthenticated">Yönetim Paneli</a>
             </li>
           </ul>
+          <div class="d-flex">
+            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" type="submit" >Sepet</button>
+          </div>
         </div>
       </div>
     </nav>
-
   </div>
   <div class="col-md-2"></div>
-
 </div>
-
-
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-8"><router-outlet></router-outlet></div>
   <div class="col-md-2"></div>
 </div>
 
-
-
-
-
+<app-baskets></app-baskets>

@@ -6,12 +6,17 @@ import { BasketsComponent } from './baskets.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    BasketsComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild([
           {path:"",component: BasketsComponent}
         ])
+  ],
+  exports : [
+    BasketsComponent
   ]
 })
 export class BasketsModule { }
