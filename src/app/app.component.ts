@@ -19,15 +19,6 @@ export class AppComponent {
 
   constructor(public authService : AuthService, private toastrService : CustomToastrService, private router : Router, private httpclientService : HttpClientService , private dynamicLoadComponentService : DynamicLoadComponentService) {
 
-    httpclientService.put({
-      controller : "baskets"
-    },{
-      basketItemId: "46238a97-b12e-4952-ae35-92f64fc465c9",
-      quantity: 125
-    }).subscribe(data => {
-      debugger;
-    });
-
 
     authService.identityCheck();
   }
