@@ -10,14 +10,17 @@ import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
 import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shopping-complete-dialog.component';
+import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
+import { MatTableModule } from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
   declarations: [
-    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent
     ],
   imports: [
-    CommonModule , MatDialogModule , MatButtonModule , FileUploadModule , MatCardModule,FormsModule
+    CommonModule , MatDialogModule , MatButtonModule , FileUploadModule , MatCardModule,FormsModule,MatTableModule,  MatToolbarModule
   ]
 })
 export class DialogModule { }
