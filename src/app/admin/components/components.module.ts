@@ -15,6 +15,12 @@ import { DashboardModule } from './dashboard/dashboard.module';
     OrderModule,
     CustomerModule,
     DashboardModule
+  ],
+  exports: [ // 👈 Buraya ekleyin!
+    ProductsModule,
+    OrderModule,
+    CustomerModule,
+    DashboardModule
   ]
 })
 export class ComponentsModule { }

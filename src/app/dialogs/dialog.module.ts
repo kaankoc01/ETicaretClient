@@ -13,14 +13,18 @@ import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shop
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 
 
 @NgModule({
   declarations: [
-    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent
     ],
   imports: [
     CommonModule , MatDialogModule , MatButtonModule , FileUploadModule , MatCardModule,FormsModule,MatTableModule,  MatToolbarModule
+  ],
+  exports : [
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent
   ]
 })
 export class DialogModule { }

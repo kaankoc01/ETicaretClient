@@ -5,4 +5,5 @@ createdDate : Date;
 description : string;
 id : string;
 orderCode : string;
+completed:boolean;
 }
