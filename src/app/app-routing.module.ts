@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:"products",loadChildren: ()=> import("./admin/components/products/products.module").then(module => module.ProductsModule) , canActivate : [authGuard]},
   {path:"orders",loadChildren: ()=> import("./admin/components/order/order.module").then(module => module.OrderModule) , canActivate : [authGuard]},
   {path:"authorize-menu",loadChildren: ()=> import("./admin/components/authorize-menu/authorize-menu.module").then(module => module.AuthorizeMenuModule) , canActivate : [authGuard]},
+  {path:"roles",loadChildren: ()=> import("./admin/components/role/role.module").then(module => module.RoleModule) , canActivate : [authGuard]},
 ], canActivate : [authGuard]
 },
 {path:"",component:HomeComponent},

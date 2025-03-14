@@ -9,7 +9,6 @@ import { HttpClientService } from 'src/app/services/common/http-client.service';
 declare var $: any
 @Directive({
   selector: '[appDelete]',
- // standalone: true
 })
 export class DeleteDirective {
 
@@ -49,7 +48,7 @@ export class DeleteDirective {
                 this.callback.emit();
               }
             );
-            this.alertifyService.message("Ürün silinmiştir.", {
+            this.alertifyService.message(`${this.controller == 'roles' ? 'Rol' : 'Ürün'} başarıyla silinmiştir` , {
               dismissOthers: true,
               messageType: MessageType.Success,
               position: Position.TopRight
@@ -64,20 +63,7 @@ export class DeleteDirective {
           }
         });
   }
-
     });
   }
-  //openDialog(afterClosed :any): void {
-  //  const dialogRef = this.dialog.open(DeleteDialogComponent, {
-  //    width : '250px',
-  //    data: DeleteState.Yes,
-  //  });
-//
-  //  dialogRef.afterClosed().subscribe(result => {
-  //    if(result == DeleteState.Yes){
-  //      afterClosed();
- //    }
-  //  });
- // }
 
 }
