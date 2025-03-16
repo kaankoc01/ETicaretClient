@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { List_User } from 'src/app/contracts/users/list_user';
+import { AuthorizeUserDialogComponent } from 'src/app/dialogs/authorize-user-dialog/authorize-user-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
-import { OrderService } from 'src/app/services/common/models/order.service';
+import { UserService } from 'src/app/services/common/models/user.service';
 
 @Component({
   selector: 'app-list',
@@ -12,62 +14,51 @@ import { OrderService } from 'src/app/services/common/models/order.service';
 })
 export class ListComponent implements OnInit{
 
-  constructor(private orderService : OrderService, private alertifyService : AlertifyService, private dialogService : DialogService) {}
+  constructor(private userService : UserService, private alertifyService : AlertifyService, private dialogService : DialogService) {}
   ngOnInit(): void {
 
   }
 
-    displayedColumns: string[] = ['orderCode' , 'userName', 'totalPrice', 'createdDate','completed','viewdetail', 'delete'];
-    dataSource: MatTableDataSource<List_Order> = null;
+    displayedColumns: string[] = ['userName', 'nameSurname', 'email','twoFactorEnabled','role','delete'];
+    dataSource: MatTableDataSource<List_User> = null;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
-    async getOrders() {
-      try {
-        const pageIndex = this.paginator?.pageIndex ?? 0;
-        const pageSize = this.paginator?.pageSize ?? 5;
-
-        const allOrders: { totalOrderCount: number; orders: List_Order[] } = await this.orderService.getAllOrders(
-          pageIndex,
-          pageSize,
-          () => this.alertifyService.message("Ürün Listelendi", {
-            dismissOthers: true,
-            messageType: MessageType.Success,
-            position: Position.TopRight
-          }),
-          (errorMessage) => this.alertifyService.message(errorMessage, {
-            dismissOthers: true,
-            messageType: MessageType.Error,
-            position: Position.TopRight
-          })
-        );
-
-        this.dataSource = new MatTableDataSource<List_Order>(allOrders.orders);
-        this.paginator.length = allOrders.totalOrderCount;
-      } catch (error) {
-        this.alertifyService.message("Ürünler yüklenirken bir hata oluştu.", {
-          dismissOthers: true,
-          messageType: MessageType.Error,
-          position: Position.TopRight
-        });
-      }
+    async getUsers() {
+      const allUsers: { totalUsersCount: number; users: List_User[] } = await this.userService.getAllUsers(this.paginator ? this.paginator.pageIndex : 0, this.paginator ? this.paginator.pageSize : 5,()=> {}, errorMessage => this.alertifyService.message(errorMessage, {
+        dismissOthers: true,
+        messageType: MessageType.Error,
+        position: Position.TopRight
+      }))
+      this.dataSource = new MatTableDataSource<List_User>(allUsers.users);
+      this.paginator.length = allUsers.totalUsersCount;
     }
 
     async pageChanged() {
-      await this.getOrders();
+      await this.getUsers();
     }
 
-     ngAfterViewInit() {
-       this.getOrders();
+     async ngAfterViewInit() {
+      await this.getUsers();
     }
-
-    showDetail(id : string){
+    assignRole(id: string) {
       this.dialogService.openDialog({
-        componentType : OrderDetailDialogComponent,
-        data : id,
-        options : {
-          width : "750px"
+        componentType: AuthorizeUserDialogComponent,
+        data: id,
+        options: {
+          width: "750px"
+        },
+        afterClosed: () => {
+          this.alertifyService.message("Roller başarıyla atanmıştır!", {
+            messageType: MessageType.Success,
+            position: Position.TopRight
+          })
         }
-      })
+      });
     }
 
-}
+    }
+
+
+
+
+
