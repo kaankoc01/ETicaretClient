@@ -6,6 +6,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import { DialogService } from 'src/app/services/common/dialog.service';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
+import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 declare var $ : any;
 
 @Component({
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit ,AfterViewInit{
   constructor(private productService : ProductService,private alertifyService : AlertifyService, private dialogService : DialogService) { }
 
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate','photos','edit','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate', 'updatedDate','photos','qrCode','edit','delete'];
   dataSource: MatTableDataSource<List_Product> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -72,6 +73,13 @@ export class ListComponent implements OnInit ,AfterViewInit{
 
   ngAfterViewInit() {
     this.getProducts();
+  }
+  showQRCode(productId : string){
+    this.dialogService.openDialog({
+      componentType : QrcodeDialogComponent,
+      data : productId,
+      afterClosed : () => {},
+    })
   }
 
 }

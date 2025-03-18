@@ -18,17 +18,18 @@ import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
+import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
 
 
 @NgModule({
   declarations: [
-    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent , QrcodeDialogComponent
     ],
   imports: [
     CommonModule , MatDialogModule , MatButtonModule , FileUploadModule , MatCardModule,FormsModule,MatTableModule,  MatToolbarModule , MatBadgeModule, MatListModule
   ],
   exports : [
-    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent , QrcodeDialogComponent
   ]
 })
 export class DialogModule { }

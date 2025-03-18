@@ -22,7 +22,7 @@ export class HttpClientService {
     else
       url = `${this.url(requestParameter)}${id ?`${id}` : ""}${requestParameter.queryString ? `?${requestParameter.queryString}` :""}`;
 
-  return this.httpCLient.get<T>(url,{ headers : requestParameter.header});
+  return this.httpCLient.get<T>(url,{ headers : requestParameter.header , responseType : requestParameter.responseType as 'json'});
   }
   post<T>(requestParameter : Partial<RequestParameters>, body:Partial<T>) : Observable<T>{
     let url : string = "";
@@ -30,7 +30,7 @@ export class HttpClientService {
       url = requestParameter.fullEndPoint;
     else
       url = `${this.url(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` :""}`
-   return this.httpCLient.post<T>(url,body,{headers : requestParameter.header});
+   return this.httpCLient.post<T>(url,body,{headers : requestParameter.header , responseType : requestParameter.responseType as 'json'});
   }
   put<T>(requestParameter : Partial<RequestParameters>, body:Partial<T>) : Observable<T>{
     let url : string = "";
@@ -38,7 +38,7 @@ export class HttpClientService {
       url = requestParameter.fullEndPoint;
     else
       url = `${this.url(requestParameter)}${requestParameter.queryString ? `?${requestParameter.queryString}` :""}`;
-    return this.httpCLient.put<T>(url,body,{headers : requestParameter.header});
+    return this.httpCLient.put<T>(url,body,{headers : requestParameter.header , responseType : requestParameter.responseType as 'json'});
   }
   delete<T>(requestParameter : Partial<RequestParameters>, id: string): Observable<T>{
   let url :string = "";
@@ -47,7 +47,7 @@ export class HttpClientService {
   else
     url = `${this.url(requestParameter)}/${id}${requestParameter.queryString ? `?${requestParameter.queryString}` :""}`;
 
-  return this.httpCLient.delete<T>(url,{headers : requestParameter.header});
+  return this.httpCLient.delete<T>(url,{headers : requestParameter.header , responseType : requestParameter.responseType as 'json'});
   }
 }
 
@@ -59,6 +59,7 @@ export class RequestParameters{
   baseUrl? : string;
 
   fullEndPoint?:string;
+  responseType? : string = 'json';
 
 
 }
