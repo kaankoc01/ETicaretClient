@@ -19,17 +19,22 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatListModule} from '@angular/material/list';
 import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
 import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
+import { QrcodeReadingDialogComponent } from './qrcode-reading-dialog/qrcode-reading-dialog.component';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 
 
 @NgModule({
   declarations: [
-    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent , QrcodeDialogComponent
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent , QrcodeDialogComponent,QrcodeReadingDialogComponent
     ],
   imports: [
-    CommonModule , MatDialogModule , MatButtonModule , FileUploadModule , MatCardModule,FormsModule,MatTableModule,  MatToolbarModule , MatBadgeModule, MatListModule
+    CommonModule , MatDialogModule , MatButtonModule , FileUploadModule , MatCardModule,FormsModule,MatTableModule,  MatToolbarModule , MatBadgeModule, MatListModule ,MatFormField ,MatLabel, MatInputModule
+    ,NgxScannerQrcodeModule
   ],
   exports : [
-    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent , QrcodeDialogComponent
+    DeleteDialogComponent ,  SelectProductImageDialogComponent , BasketItemRemoveDialogComponent , ShoppingCompleteDialogComponent, OrderDetailDialogComponent,CompleteOrderDialogComponent,AuthorizeMenuDialogComponent , AuthorizeUserDialogComponent , QrcodeDialogComponent,QrcodeReadingDialogComponent
   ]
 })
 export class DialogModule { }
